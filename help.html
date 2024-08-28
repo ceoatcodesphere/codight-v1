@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codight</title>
+    <link rel="stylesheet" href="assets/css/html.css">
+    <link rel="shortcut icon" href="assets/imgs/logo.jpg" type="image/x-icon">
+    <style>
+  /* Reset some default styles */
+body, h1, h2, input, button, pre, code {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styling for the container */
+.my-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Styling for the header */
+.header h1 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Styling for the search section */
+.search {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.search input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.search button {
+    padding: 10px;
+    background-color: #695aa6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.search button:hover {
+    background-color:#695aa6;
+}
+
+/* Styling for the result section */
+#result {
+    margin-top: 20px;
+}
+
+#result h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#code-snippet {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+#code-snippet code {
+    display: block;
+}
+
+#copyBtn {
+    margin-top: 10px;
+    padding: 10px;
+    background-color:#695aa6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#copyBtn:hover {
+    background-color:#695aa6;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .search {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .search input, .search button {
+        font-size: 0.9rem;
+    }
+
+    #result h2 {
+        font-size: 1.25rem;
+    }
+
+    #code-snippet {
+        padding: 10px;
+    }
+
+    #copyBtn {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+}
+
+
+    </style>
+</head>
+<body >
+   
+                  <!-- for header part -->
+    <header>
+
+        <div class="logosec">
+            <a href="index.html"><div class="logo">Codight</div></a>
+            
+        </div>
+
+        <img src=
+        "https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
+                        class="icn menuicn" 
+                        id="menuicn" 
+                        alt="menu-icon">
+    </header>
+
+    <div class="main-container">
+        <div class="navcontainer">
+            <nav class="nav">
+                <div class="nav-upper-options">
+                    <a href="html-teaching.html">
+                        <div class="nav-option option3">
+                            <img src=
+    "https://cdn-icons-png.flaticon.com/512/11412/11412327.png"
+                                class="nav-img" 
+                                alt="dashboard">
+                            <h3>HTML </h3>
+                        </div>
+                    </a>
+                        <a href="extra-knowledge.html">
+                    <div class="option2 nav-option">
+                        <img src=
+"https://cdn.iconscout.com/icon/free/png-256/free-setting-icon-download-in-svg-png-gif-file-formats--gears-technology-cogwheel-settings-business-pack-icons-1194828.png?f=webp&w=1289"
+                            class="nav-img" 
+                            alt="articles">
+                        <h3> UPDATES</h3>
+                    </div>
+                </a>
+                        <div class="option1 nav-option">
+                            <img src=
+    "https://icons.veryicon.com/png/o/miscellaneous/flat-icon/help-252.png"
+                                class="nav-img" 
+                                alt="articles">
+                            <h3>HELP</h3>
+                        </div>
+                 
+                </div>
+            </nav>
+        </div>
+        <div class="main">
+      
+
+            <div class="my-container">
+                <div class="header">
+                    <h1>AI HTML Code Assistant</h1>
+                </div>
+                <main>
+                    <div class="search">
+                        <input type="text" id="query" placeholder="Ask a question about HTML...">
+                        <button onclick="getCode()">Get Code</button>
+                    </div>
+                    <div id="result">
+                        <h2>Code Snippet</h2>
+                        <pre id="code-snippet"><code></code></pre>
+                        <button id="copyBtn" onclick="copyCode()">Copy Code</button>
+                    
+                    </div>
+                </main>
+          
+            </div>
+
+
+             </div>
+    </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    let menuicn = document.querySelector(".menuicn");
+let nav = document.querySelector(".navcontainer");
+
+menuicn.addEventListener("click", () => {
+    nav.classList.toggle("navclose");
+})
+
+const codeExamples = [
+    { keywords: ["h1", "heading"], code: `<h1>Your Heading</h1>`, example: `<h1>Your Heading</h1>` },
+    { keywords: ["h2", "heading"], code: `<h2>Your Heading</h2>`, example: `<h2>Your Heading</h2>` },
+    { keywords: ["h3", "heading"], code: `<h3>Your Heading</h3>`, example: `<h3>Your Heading</h3>` },
+    { keywords: ["h4", "heading"], code: `<h4>Your Heading</h4>`, example: `<h4>Your Heading</h4>` },
+    { keywords: ["h5", "heading"], code: `<h5>Your Heading</h5>`, example: `<h5>Your Heading</h5>` },
+    { keywords: ["h6", "heading"], code: `<h6>Your Heading</h6>`, example: `<h6>Your Heading</h6>` },
+    { keywords: [ "link"], code: `<a href="https://example.com">example link</a>`, example: `<h6>Your Heading</h6>` },
+    { keywords: ["paragraph"], code: `<p>Your paragraph text here.</p>`, example: `<p>Your paragraph text here.</p>` },
+    { keywords: ["br", "line break"], code: `<br>`, example: `Line break<br>here.` },
+    { keywords: ["hr", "horizontal rule"], code: `<hr>`, example: `<hr>` },
+    { keywords: ["pre", "preformatted text"], code: `<pre>Your preformatted text here.</pre>`, example: `<pre>Your preformatted text here.</pre>` },
+    { keywords: ["blockquote", "quote"], code: `<blockquote>Your quote here.</blockquote>`, example: `<blockquote>Your quote here.</blockquote>` },
+    { keywords: [ "ordered list"], code: `<ol><li>Item 1</li><li>Item 2</li></ol>`, example: `<ol><li>Item 1</li><li>Item 2</li></ol>` },
+    { keywords: [ "unordered list"], code: `<ul><li>Item 1</li><li>Item 2</li></ul>`, example: `<ul><li>Item 1</li><li>Item 2</li></ul>` },
+    { keywords: ["list", "list item"], code: `<li>Item</li>`, example: `<ul><li>Item</li></ul>` },
+    { keywords: [ "description list"], code: `<dl><dt>Term</dt><dd>Description</dd></dl>`, example: `<dl><dt>Term</dt><dd>Description</dd></dl>` },
+    { keywords: [ "description term"], code: `<dt>Term</dt>`, example: `<dl><dt>Term</dt><dd>Description</dd></dl>` },
+    { keywords: ["figure"], code: `<figure><img src="image.jpg" alt="Description"><figcaption>Caption</figcaption></figure>`, example: `<figure><img src="https://via.placeholder.com/150" alt="Description"><figcaption>Caption</figcaption></figure>` },
+    { keywords: ["figcaption"], code: `<figcaption>Caption</figcaption>`, example: `<figure><img src="https://via.placeholder.com/150" alt="Description"><figcaption>Caption</figcaption></figure>` },
+    { keywords: ["div", "division"], code: `<div>Your content here.</div>`, example: `<div>Your content here.</div>` },
+    { keywords: ["span"], code: `<span>Your inline content here.</span>`, example: `<span>Your inline content here.</span>` },
+    { keywords: ["header"], code: `<header>Your header content here.</header>`, example: `<header>Your header content here.</header>` },
+    { keywords: ["footer"], code: `<footer>Your footer content here.</footer>`, example: `<footer>Your footer content here.</footer>` },
+    { keywords: ["main"], code: `<main>Your main content here.</main>`, example: `<main>Your main content here.</main>` },
+    { keywords: ["section"], code: `<section>Your section content here.</section>`, example: `<section>Your section content here.</section>` },
+    { keywords: ["article"], code: `<article>Your article content here.</article>`, example: `<article>Your article content here.</article>` },
+    { keywords: ["aside"], code: `<aside>Your aside content here.</aside>`, example: `<aside>Your aside content here.</aside>` },
+    { keywords: ["nav", "navigation"], code: `<nav>Your navigation content here.</nav>`, example: `<nav>Your navigation content here.</nav>` },
+    { keywords: ["address"], code: `<address>Your address content here.</address>`, example: `<address>Your address content here.</address>` },
+    { keywords: ["time"], code: `<time datetime="2024-08-26">August 26, 2024</time>`, example: `<time datetime="2024-08-26">August 26, 2024</time>` },
+    { keywords: ["mark"], code: `<mark>Highlighted text</mark>`, example: `<mark>Highlighted text</mark>` },
+    { keywords: ["abbr", "abbreviation"], code: `<abbr title="Abbreviation Title">abbr</abbr>`, example: `<abbr title="Abbreviation Title">abbr</abbr>` },
+    { keywords: ["cite", "citation"], code: `<cite>Your citation here.</cite>`, example: `<cite>Your citation here.</cite>` },
+    { keywords: [ "bold"], code: `<b>Bold text</b>`, example: `<b>Bold text</b>` },
+    { keywords: [ "italic"], code: `<i>Italic text</i>`, example: `<i>Italic text</i>` },
+    { keywords: ["underline"], code: `<u>Underlined text</u>`, example: `<u>Underlined text</u>` },
+    { keywords: ["strong", "important"], code: `<strong>Important text</strong>`, example: `<strong>Important text</strong>` },
+    { keywords: ["em", "emphasized"], code: `<em>Emphasized text</em>`, example: `<em>Emphasized text</em>` },
+    { keywords: ["small"], code: `<small>Small text</small>`, example: `<small>Small text</small>` },
+    { keywords: [ "superscript"], code: `<sup>Superscript text</sup>`, example: `<sup>Superscript text</sup>` },
+    { keywords: [ "subscript"], code: `<sub>Subscript text</sub>`, example: `<sub>Subscript text</sub>` },
+    { keywords: [ "inserted"], code: `<ins>Inserted text</ins>`, example: `<ins>Inserted text</ins>` },
+    { keywords: [ "deleted"], code: `<del>Deleted text</del>`, example: `<del>Deleted text</del>` },
+    { keywords: ["code"], code: `<code>Inline code</code>`, example: `<code>Inline code</code>` },
+    { keywords: ["var", "variable"], code: `<var>Variable name</var>`, example: `<var>Variable name</var>` },
+    { keywords: ["samp", "sample output"], code: `<samp>Sample output</samp>`, example: `<samp>Sample output</samp>` },
+    { keywords: ["kbd", "keyboard input"], code: `<kbd>Keyboard input</kbd>`, example: `<kbd>Keyboard input</kbd>` },
+    { keywords: ["bdo", "bidirectional override"], code: `<bdo dir="rtl">Right to left text</bdo>`, example: `<bdo dir="rtl">Right to left text</bdo>` },
+    { keywords: [ "short quotation"], code: `<q>Inline quote</q>`, example: `<q>Inline quote</q>` },
+    { keywords: ["dfn", "definition"], code: `<dfn>Defined term</dfn>`, example: `<dfn>Defined term</dfn>` },
+    { keywords: ["img", "image"], code: `<img src="https://via.placeholder.com/150" alt="Image description">`, example: `<img src="https://via.placeholder.com/150" alt="Image description">` },
+    { keywords: ["audio"], code: `<audio controls><source src="audio.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>`, example: `<audio controls><source src="audio.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>` },
+    { keywords: ["video"], code: `<video controls><source src="video.mp4" type="video/mp4">Your browser does not support the video element.</video>`, example: `<video controls><source src="video.mp4" type="video/mp4">Your browser does not support the video element.</video>` },
+    { keywords: ["source"], code: `<source src="video.mp4" type="video/mp4">`, example: `<video controls><source src="video.mp4" type="video/mp4">Your browser does not support the video element.</video>` },
+    { keywords: ["track"], code: `<track src="subtitles.vtt" kind="subtitles" srclang="en" label="English">`, example: `<video controls><track src="subtitles.vtt" kind="subtitles" srclang="en" label="English">Your browser does not support the video element.</video>` },
+    { keywords: ["canvas"], code: `<canvas id="myCanvas"></canvas>`, example: `<canvas id="myCanvas" style="border:1px solid #000000;"></canvas>` },
+    { keywords: ["map", "image map"], code: `<map name="mapname"><area shape="rect" coords="34,44,270,350" alt="Description" href="https://example.com"></map>`, example: `<img src="https://via.placeholder.com/500" usemap="#mapname"><map name="mapname"><area shape="rect" coords="34,44,270,350" alt="Description" href="https://example.com"></map>` },
+    { keywords: ["area"], code: `<area shape="rect" coords="34,44,270,350" alt="Description" href="https://example.com">`, example: `<img src="https://via.placeholder.com/500" usemap="#mapname"><map name="mapname"><area shape="rect" coords="34,44,270,350" alt="Description" href="https://example.com"></map>` },
+    { keywords: ["svg"], code: `<svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red"></circle></svg>`, example: `<svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red"></circle></svg>` },
+    { keywords: ["iframe"], code: `<iframe src="https://example.com" width="300" height="200"></iframe>`, example: `<iframe src="https://example.com" width="300" height="200"></iframe>` },
+    { keywords: ["form"], code: `<form action="/submit" method="post"><input type="text" name="name"><button type="submit">Submit</button></form>`, example: `<form action="/submit" method="post"><input type="text" name="name"><button type="submit">Submit</button></form>` },
+    { keywords: ["input"], code: `<input type="text" name="name">`, example: `<form action="/submit" method="post"><input type="text" name="name"><button type="submit">Submit</button></form>` },
+    { keywords: ["textarea"], code: `<textarea name="message"></textarea>`, example: `<form action="/submit" method="post"><textarea name="message"></textarea><button type="submit">Submit</button></form>` },
+    { keywords: ["button"], code: `<button type="button">Click me</button>`, example: `<button type="button">Click me</button>` },
+    { keywords: ["select"], code: `<select name="options"><option value="1">Option 1</option></select>`, example: `<form action="/submit" method="post"><select name="options"><option value="1">Option 1</option></select><button type="submit">Submit</button></form>` },
+    { keywords: ["option"], code: `<option value="1">Option 1</option>`, example: `<form action="/submit" method="post"><select name="options"><option value="1">Option 1</option></select><button type="submit">Submit</button></form>` },
+    { keywords: ["optgroup"], code: `<optgroup label="Group"><option value="1">Option 1</option></optgroup>`, example: `<form action="/submit" method="post"><select name="options"><optgroup label="Group"><option value="1">Option 1</option></optgroup></select><button type="submit">Submit</button></form>` },
+    { keywords: ["label"], code: `<label for="name">Name:</label>`, example: `<form action="/submit" method="post"><label for="name">Name:</label><input type="text" name="name"><button type="submit">Submit</button></form>` },
+    { keywords: ["fieldset"], code: `<fieldset><legend>Group</legend><input type="text" name="name"></fieldset>`, example: `<form action="/submit" method="post"><fieldset><legend>Group</legend><input type="text" name="name"><button type="submit">Submit</button></fieldset></form>` },
+    { keywords: ["legend"], code: `<legend>Group</legend>`, example: `<form action="/submit" method="post"><fieldset><legend>Group</legend><input type="text" name="name"><button type="submit">Submit</button></fieldset></form>` },
+    { keywords: ["datalist"], code: `<datalist id="list"><option value="Option 1"></datalist>`, example: `<form action="/submit" method="post"><input list="list"><datalist id="list"><option value="Option 1"></datalist><button type="submit">Submit</button></form>` },
+    { keywords: ["output"], code: `<output name="result"></output>`, example: `<form action="/submit" method="post"><output name="result"></output><button type="submit">Submit</button></form>` },
+    { keywords: ["progress"], code: `<progress value="50" max="100"></progress>`, example: `<progress value="50" max="100"></progress>` },
+    { keywords: ["meter"], code: `<meter value="0.6"></meter>`, example: `<meter value="0.6"></meter>` },
+    { keywords: ["table"], code: `<table><tr><th>Header</th></tr><tr><td>Data</td></tr></table>`, example: `<table><tr><th>Header</th></tr><tr><td>Data</td></tr></table>` },
+    { keywords: ["caption"], code: `<caption>Table Caption</caption>`, example: `<table><caption>Table Caption</caption><tr><th>Header</th></tr><tr><td>Data</td></tr></table>` },
+    { keywords: ["tr", "table row"], code: `<tr><td>Data</td></tr>`, example: `<table><tr><td>Data</td></tr></table>` },
+    { keywords: ["th", "table header"], code: `<th>Header</th>`, example: `<table><tr><th>Header</th></tr><tr><td>Data</td></tr></table>` },
+    { keywords: ["td", "table data"], code: `<td>Data</td>`, example: `<table><tr><td>Data</td></tr></table>` },
+    { keywords: ["thead", "table head"], code: `<thead><tr><th>Header</th></tr></thead>`, example: `<table><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody></table>` },
+    { keywords: ["tbody", "table body"], code: `<tbody><tr><td>Data</td></tr></tbody>`, example: `<table><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody></table>` },
+    { keywords: ["tfoot", "table foot"], code: `<tfoot><tr><td>Footer</td></tr></tfoot>`, example: `<table><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr><tfoot><tr><td>Footer</td></tr></tfoot></table>` },
+    { keywords: ["col"], code: `<col span="1">`, example: `<table><col span="1"><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr><td>Footer</td></tr></tfoot></table>` },
+    { keywords: ["colgroup"], code: `<colgroup span="2"></colgroup>`, example: `<table><colgroup span="2"></colgroup><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Data</td></tr></tbody><tfoot><tr><td>Footer</td></tr></tfoot></table>` },
+    { keywords: ["details"], code: `<details><summary>Details</summary>Content</details>`, example: `<details><summary>Details</summary>Content</details>` },
+    { keywords: ["summary"], code: `<summary>Summary</summary>`, example: `<details><summary>Details</summary>Content</details>` },
+    { keywords: ["dialog"], code: `<dialog open>Dialog content</dialog>`, example: `<dialog open>Dialog content</dialog>` },
+    { keywords: ["menu"], code: `<menu><menuitem label="Menu Item"></menuitem></menu>`, example: `<menu><menuitem label="Menu"</menu>`},
+
+    // Add more examples with relevant keywords
+];
+
+function getCode() {
+    const query = document.getElementById('query').value.toLowerCase();
+    const result = document.getElementById('code-snippet');
+  
+
+    let found = false;
+    for (let example of codeExamples) {
+        if (example.keywords.some(keyword => query.includes(keyword))) {
+            result.innerText = example.code;
+            exampleElement.innerHTML = example.example;
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        result.innerText = "Sorry, I don't have information on that topic. Please try another question.";
+        exampleElement.innerHTML = "";
+    }
+}
+
+function copyCode() {
+    const codeSnippet = document.getElementById('code-snippet').innerText;
+    navigator.clipboard.writeText(codeSnippet).then(() => {
+        alert('Code copied to clipboard!');
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+}
+</script>
+</body>
+</html>

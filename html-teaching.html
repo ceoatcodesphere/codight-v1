@@ -1,0 +1,131 @@
+   
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codight</title>
+    <link rel="stylesheet" href="assets/css/html.css">
+    <link rel="shortcut icon" href="assets/imgs/logo.jpg" type="image/x-icon">
+</head>
+<body>
+   
+                  <!-- for header part -->
+    <header>
+
+        <div class="logosec">
+        <a href="index.html"><div class="logo">Codight</div></a>
+            
+        </div>
+
+        <img src=
+        "https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
+                        class="icn menuicn" 
+                        id="menuicn" 
+                        alt="menu-icon">
+    </header>
+
+    <div class="main-container">
+        <div class="navcontainer">
+            <nav class="nav">
+                <div class="nav-upper-options">
+                    <div class="nav-option option1">
+                        <img src=
+"https://cdn-icons-png.flaticon.com/512/11412/11412327.png"
+                            class="nav-img" 
+                            alt="dashboard">
+                        <h3> HTML</h3>
+                    </div>
+                    <a href="extra-knowledge.html">
+                    <div class="option2 nav-option">
+                        <img src=
+"https://cdn.iconscout.com/icon/free/png-256/free-setting-icon-download-in-svg-png-gif-file-formats--gears-technology-cogwheel-settings-business-pack-icons-1194828.png?f=webp&w=1289"
+                            class="nav-img" 
+                            alt="articles">
+                        <h3>UPDATES</h3>
+                    </div>
+                </a>
+                <a href="help.html">
+                    <div class="option2 nav-option">
+                        <img src="https://icons.veryicon.com/png/o/miscellaneous/flat-icon/help-252.png"
+                            class="nav-img" 
+                            alt="articles">
+                        <h3>HELP</h3>
+                    </div>
+                </a>
+
+
+                </div>
+            </nav>
+        </div>
+        <div class="main">
+            <a href="html1.html">
+            <div class="rectangle-box" id="videoBox">
+                <img src="assets/imgs/INDRNUCTIOng.png" alt="Episode Image">
+                <div class="content">
+                    <h2>Introduction Of HTML</h2>
+                    <p>Episode No: 1 </p>
+                </div>
+            </div>
+        </a>
+        <a href="html2.html">
+            <div class="rectangle-box" id="videoBox">
+                <img src="assets/imgs/ht5ml2.png" alt="Episode Image">
+                <div class="content">
+                    <h2>New tags and attributes </h2>
+                    <p>Episode No: 2 </p>
+                </div>
+            </div>
+        </a>
+        <a href="html3.html">
+            <div class="rectangle-box" id="videoBox">
+                <img src="assets/imgs/html3.png" alt="Episode Image">
+                <div class="content">
+                    <h2>Last part of html</h2>
+                    <p>Episode No: 3 </p>
+                </div>
+            </div>
+        </a>
+        
+            <!-- Modal -->
+
+            
+        </div>
+    </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    let menuicn = document.querySelector(".menuicn");
+let nav = document.querySelector(".navcontainer");
+
+menuicn.addEventListener("click", () => {
+    nav.classList.toggle("navclose");
+    const videoBox = document.getElementById('videoBox');
+    const videoModal = document.getElementById('videoModal');
+    const closeModal = document.getElementById('closeModal');
+
+    videoBox.onclick = function() {
+        videoModal.style.display = "flex";
+    }
+
+    closeModal.onclick = function() {
+        videoModal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target === videoModal) {
+            videoModal.style.display = "none";
+        }
+    }
+
+})
+</script>
+</body>
+</html>
